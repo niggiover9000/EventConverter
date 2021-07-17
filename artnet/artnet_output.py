@@ -25,6 +25,11 @@ class ArtNetOutput:
         self.socket = ArtNetSocket()
 
     def load_artnet_output(self):
+        """
+        This will load all the settings for the Art-Net output from the settings.dat. If no values are stored, the
+        default value will be used
+        :return: None
+        """
         loading = LoadSettings()
         loading.open_settings("sACN", "sacndict", {})
         self.sacndict = loading.load_settings()
@@ -34,6 +39,12 @@ class ArtNetOutput:
         self.receiver_ips = loading.load_settings()
 
     def artdmx_output(self, artnet_data, physical=0):
+        """
+        Builds an ArtDMX packet to send it to the socket.
+        :param artnet_data: the DMX data.
+        :param physical: The physical input port from which the data originates. 0 = disabled.
+        :return: None
+        """
         self.artnet_data = artnet_data
         # 0-39 DEVICES: UNICAST, 40+ DEVICES: BROADCAST
         # 1:        ID[8] ('A''r''t''-''N''e''t' 0x00)
@@ -70,6 +81,10 @@ class ArtNetOutput:
             self.artnet_output()
 
     def artnet_output(self):
+        """
+        Sends an Art-Net packet to the socket.
+        :return: None
+        """
         if len(self.receiver_ips) > 40:  # If there are more than 40 receivers, send broadcast to save network capacity
             print(f"Changed to broadcast sending, since there are {len(self.receiver_ips)} Universes active and it will"
                   f"save network traffic to send broadcast.")

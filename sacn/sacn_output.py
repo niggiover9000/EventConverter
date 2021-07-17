@@ -61,11 +61,25 @@ class SACNOutput:
         self.socket = SACNSocket()
         
     def load_sacn_output(self):
+        """
+        This will load all the settings for the sACN output from the settings.dat. If no values are stored, the
+        default value will be used
+        :return: None
+        """
         loading = LoadSettings()
         loading.open_settings("Art-Net", "artnet_priority", 100)
         self.artnet_priority = loading.load_settings()
         
     def sacn_dmx_output(self, sacn_data, preview_data=0, stream_terminated=0, force_synchronisation=0):
+        """
+        Builds a sACN packet to send it to the socket.
+        :param sacn_data: the DMX data.
+        :param preview_data: Preview data will be ignored by devices outputting actual DMX data. Used for visualizers
+            and media servers.
+        :param stream_terminated: Terminate the stream without the need of a timeout.
+        :param force_synchronisation: If set to 1, receivers should ignore all packets until resynced.
+        :return: None
+        """
         self.sacn_data = sacn_data
         # E131 Data Packet:
         # # # ROOT LAYER # # #
@@ -160,6 +174,10 @@ class SACNOutput:
         self.sacn_output()
 
     def sacn_output(self):
+        """
+        Sends a sACN packet to the socket.
+        :return: None
+        """
         try:
             self.socket.sacn_socket.sendto(self.sacn_packet, (self.multicast_address, self.socket.port))
         except Exception as exception:
