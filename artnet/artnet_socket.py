@@ -17,6 +17,7 @@ class ArtNetSocket:
         self.port = None
         self.broadcast = None
         self.broadcast_ip = None
+        self.artnetdict = {}
         self.load_artnet_socket()
         self.artnet_socket = self.set_artnet_socket()
 
