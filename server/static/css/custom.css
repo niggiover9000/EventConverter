@@ -1,0 +1,33 @@
+.color-inverted-20 {
+	filter: invert(20%);
+}
+
+.color-inverted-40 {
+	filter: invert(40%);
+}
+
+.color-inverted-60 {
+	filter: invert(60%);
+}
+
+.color-inverted-80 {
+	filter: invert(80%);
+}
+
+.color-inverted-100 {
+	filter: invert(100%);
+}
+
+.btn-no-color {
+    background-color: #6c757d;
+    border-color: #212529;
+}
+
+.top-offset-4 {
+    position: relative;
+    top: -4px
+}
+
+.margin-top-100 {
+    margin-top: 100px;
+}
