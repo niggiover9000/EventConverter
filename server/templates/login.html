@@ -1,0 +1,30 @@
+{%include "elements/header.html"%}
+{%include "elements/navbar.html"%}
+{%include "elements/flash_messages.html"%}
+
+<!--- Login -->
+<div class="margin-top-100 card col-lg-4 col-md-6 col-sm-12 mx-auto btn-no-color">
+    <img class="mx-auto" src="static/img/logo.png" alt="">
+    <div class="card-body">
+        <form method="post" action="login">
+            <div class="form-group">
+                <label for="InputUsername">
+                    User Name
+                </label>
+                <input type="text" class="form-control" id="InputUsername" name="username" aria-describedby="emailHelp">
+            </div>
+            <label for="InputPassword">
+                    Password
+                </label>
+            <div class="form-group input-group">
+
+                <input type="password" class="form-control" name="password" id="InputPassword">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit" id="button-addon">Login</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{%include "elements/footer.html"%}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+      <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.min.css')}}">
+      <!-- Additional CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/custom.css')}}">
+      <!-- Favicon -->
+      <link rel="shortcut icon" href="{{url_for('static', filename='img/logo.ico')}}">
+
+      {% if title %}
+      <title>{{ title }}</title>
+      {% else %}
+      <title>The Lighting Converter</title>
+      {% endif%}
+  </head>

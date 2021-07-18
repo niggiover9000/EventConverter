@@ -1,0 +1,49 @@
+<body class="bg-dark text-light">
+<!--- NAVBAR -->
+    <nav class="navbar navbar-expand-md navbar-fixed-top navbar-dark bg-dark border-bottom border-white">
+        <a class="navbar-brand" href="#">
+            <img src="static/img/logo.png" width="50" height="50" alt="">
+            The Lighting Converter
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">
+            </span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item
+              {%if request.path == url_for('home')%}
+                active
+                {%endif%}">
+                <a class="nav-link" href="{{url_for('home')}}">
+                    <img src="{{url_for('static', filename='img/bootstrap-icons/icons/house-door.svg')}}" alt="" title="Home" class="color-inverted-80">
+                    Home
+                  </a>
+              </li>
+              <li class="nav-item
+{%if request.path == url_for('settings')%}
+                active
+                {%endif%}">
+                  <a class="nav-link" href="{{url_for('settings')}}">
+                      <img src="{{url_for('static', filename='img/bootstrap-icons/icons/gear.svg')}}" alt="" title="Settings" class="color-inverted-80">
+                      Settings
+                  </a>
+              </li>
+              <li class="nav-item
+{%if request.path == url_for('about')%}
+                active
+                {%endif%}">
+                  <a class="nav-link" href="{{url_for('about')}}">
+                      <img src="{{url_for('static', filename='img/bootstrap-icons/icons/info-square.svg')}}" alt="" title="Info" class="color-inverted-80">
+                      About
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="{{url_for('logout')}}">
+                      <img src="{{url_for('static', filename='img/bootstrap-icons/icons/person-check.svg')}}" alt="" title="Logout" class="color-inverted-80">
+                      Logout
+                  </a>
+              </li>
+            </ul>
+        </div>
+    </nav>
