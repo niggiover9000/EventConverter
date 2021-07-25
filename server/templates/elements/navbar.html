@@ -1,4 +1,4 @@
-<body class="bg-dark text-light">
+<body class="bg-dark text-light overflow-hidden">
 <!--- NAVBAR -->
     <nav class="navbar navbar-expand-md navbar-fixed-top navbar-dark bg-dark border-bottom border-white">
         <a class="navbar-brand" href="#">
@@ -16,7 +16,7 @@
                 active
                 {%endif%}">
                 <a class="nav-link" href="{{url_for('home')}}">
-                    <img src="{{url_for('static', filename='img/bootstrap-icons/icons/house-door.svg')}}" alt="" title="Home" class="color-inverted-80">
+                    <img src="{{url_for('static', filename='img/bootstrap-icons-1.5.0/house-door.svg')}}" alt="" title="Home" class="color-inverted-80">
                     Home
                   </a>
               </li>
@@ -25,7 +25,7 @@
                 active
                 {%endif%}">
                   <a class="nav-link" href="{{url_for('settings')}}">
-                      <img src="{{url_for('static', filename='img/bootstrap-icons/icons/gear.svg')}}" alt="" title="Settings" class="color-inverted-80">
+                      <img src="{{url_for('static', filename='img/bootstrap-icons-1.5.0/gear.svg')}}" alt="" title="Settings" class="color-inverted-80">
                       Settings
                   </a>
               </li>
@@ -34,13 +34,13 @@
                 active
                 {%endif%}">
                   <a class="nav-link" href="{{url_for('about')}}">
-                      <img src="{{url_for('static', filename='img/bootstrap-icons/icons/info-square.svg')}}" alt="" title="Info" class="color-inverted-80">
+                      <img src="{{url_for('static', filename='img/bootstrap-icons-1.5.0/info-square.svg')}}" alt="" title="Info" class="color-inverted-80">
                       About
                   </a>
               </li>
               <li class="nav-item">
                   <a class="nav-link" href="{{url_for('logout')}}">
-                      <img src="{{url_for('static', filename='img/bootstrap-icons/icons/person-check.svg')}}" alt="" title="Logout" class="color-inverted-80">
+                      <img src="{{url_for('static', filename='img/bootstrap-icons-1.5.0/person-check.svg')}}" alt="" title="Logout" class="color-inverted-80">
                       Logout
                   </a>
               </li>
