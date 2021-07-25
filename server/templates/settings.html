@@ -1,10 +1,131 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{%include "elements/header.html"%}
+{%include "elements/navbar.html"%}
+<div class="justify-content-center p-5 row row-cols-lg-3 row-col-md-6 row-col-sm-12">
+    <!--- sACN settings -->
+    <div class="card bg-secondary p-3">
+        <h1 class="display-4">
+            sACN Settings
+        </h1>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="sacn_merging" {%if sacn_merging is true%} checked {%endif%}>
+            <label class="form-check-label" for="sacn_merging">Enable Merging</label>
+        </div>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="per_channel_priority" {%if per_channel_priority is true%} checked {%endif%}>
+            <label class="form-check-label" for="per_channel_priority">Listen to per-channel-priority packets
+            </label>
+            <button type="button" class="btn btn-sm" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Per-Channel-Packets are used by some ETC devices. Causes more processor load but makes merging more powerful. Enable if you notice flickering in some devices.">
+                <img src="{{url_for('static', filename='img/bootstrap-icons-1.5.0/question-circle.svg')}}" alt="" title="Home" class="color-inverted-100 top-offset-4">
+            </button>
+        </div>
+    </div>
 
-</body>
-</html>
+    <!--- Art-Net settings -->
+    <div class="card bg-secondary p-3">
+        <h1 class="display-4">
+            Art-Net Settings
+        </h1>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="artnet-merging" disabled>
+            <label class="form-check-label" for="per_channel_priority">Enable Merging
+            </label>
+        </div>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="broadcast" {%if per_channel_priority is true%} checked {%endif%} disabled>
+            <label class="form-check-label" for="per_channel_priority">Send broadcast instead of unicast
+            </label>
+            <button type="button" class="btn btn-sm" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right" data-bs-content="Some old network devices only understand Broadcast, but it may cause a huge amount of traffic when using many universes. Also, some switches may stop listening to this device if there is a function against broadcast storming enabled. Broadcast will be automatically enabled if there are more than 40 universes active.">
+                <img src="{{url_for('static', filename='img/bootstrap-icons-1.5.0/question-circle.svg')}}" alt="" title="Home" class="color-inverted-100 top-offset-4">
+            </button>
+        </div>
+    </div>
+
+
+    <!--- Update -->
+    <div class="card bg-secondary p-3">
+        <h1 class="display-4">
+            Check for updates
+        </h1>
+        <div class="btn-group">
+            <a href="https://github.com/niggiover9000/sACNtoArtNet" target="_blank" class="btn btn-primary disabled">
+            <img src="{{url_for('static', filename='img/bootstrap-icons-1.5.0/file-earmark-arrow-down.svg')}}" alt="" title="Open Homepage" class="color-inverted-100">
+            Search for updates
+            </a>
+
+            <div class="btn btn-dark disabled">
+                Version: {{version}}
+            </div>
+        </div>
+    </div>
+
+    <!--- Serial Key -->
+    <div class="card bg-secondary p-3">
+        <h1 class="display-4">
+            Activate Key
+        </h1>
+        <form method="post" action="enable_key">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="XXXX-XXXX-XXXX-XXXX" name="key" aria-label="Serial Key" aria-describedby="activate-key" disabled>
+                <input type="text" class="form-control" placeholder="Name" name="name" aria-label="Serial Key" aria-describedby="activate-key" disabled>
+                <div class="input-group-append">
+                    <button class="btn btn btn-primary" type="submit" id="button-addon2" disabled>
+                        Validate
+                    </button>
+                </div>
+            </div>
+        </form>
+        {% if max_universes %}
+        At the moment, {{max_universes}} universes can be used.
+        {% endif %}
+    </div>
+
+    <!--- Password -->
+    <div class="card bg-secondary p-3">
+        <h1 class="display-4">
+            Change Password
+        </h1>
+        <form method="post" action="change_password">
+            <div class="input-group mb-3">
+                <input type="username" name="username" class="form-control" placeholder="New Username" aria-label="New Username" aria-describedby="button-addon3">
+            </div>
+            <div class="input-group mb-3">
+                <input type="password" name="password" class="form-control" placeholder="New Password" aria-label="New Password" aria-describedby="button-addon3">
+                <input type="password" name="confirm_password" class="form-control" placeholder="Repeat Password" aria-label="Repeat Password" aria-describedby="button-addon3">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit" id="button-addon3">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!--- Factory Reset -->
+    <div class="card bg-secondary p-3">
+        <h1 class="display-4">
+            Factory Reset
+        </h1>
+        <!-- Button trigger modal -->
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#factory_reset">
+      Reset to factory defaults
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="factory_reset" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-dark" id="factory_reset_label">Reset to factory defaults</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-dark">
+            <p>Are you sure? This cannot be undone. All stored data will be removed. Login data will be reset to defaults!</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger">Yes, I am sure</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+</div>
+{%include "elements/footer.html"%}
