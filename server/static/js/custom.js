@@ -1,24 +1,13 @@
-<!-- Popover Script -->
-// $(function(){
-//     (document).ready(function(){
-//       ('[data-toggle="popover"]').popover();
-//     });
-// })
-//
-// /* This function updates the live content fields. */
-// $(function(){
-//     window.setInterval(function(){
-//     loadNewArtNetData()
-//     }, 100)
-//
-// function loadNewArtNetData(){
-//     $.ajax({
-//         url:"/_artnet_monitor",
-//         type: "POST",
-//         dataType: "json",
-//         success: function(data){
-//             $(artnet_data).replaceWith(data)
-//         }
-//     })
-// }
-// });
+// Enable Popovers
+var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
+  return new bootstrap.Popover(popoverTriggerEl)
+})
+
+// Enable Modals
+var myModal = document.getElementById('myModal')
+var myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', function () {
+  myInput.focus()
+})
